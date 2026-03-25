@@ -12,14 +12,20 @@ void conjugate_gradient_csr(const double* values, const int* col_indices, const 
     double* Ap = new double[n];
     double* Ax = new double[n];
 
+    #pragma omp target data map(alloc: r[0:n], p[0:n], Ap[0:n], Ax[0:n]) \
+                            map(to: values[0:row_start[n]], col_indices[0:row_start[n]], row_start[0:n+1], b[0:n]) \
+                            map(tofrom: x[0:n])
+{
     // Initial step: compute r = b - A*x
     matrix_vector_multiply_csr(values, col_indices, row_start, x, Ax, n);
+    #pragma omp target teams distribute parallel for
     for (int i = 0; i < n; ++i) {
         r[i] = b[i] - Ax[i];
         p[i] = r[i];
     }
 
     double rsold = 0.0;
+    #pragma omp target teams distribute parallel for reduction(+:rsold)
     for (int i = 0; i < n; ++i) {
         rsold += r[i] * r[i];
     }
@@ -27,17 +33,20 @@ void conjugate_gradient_csr(const double* values, const int* col_indices, const 
     for (int i = 0; i < max_iterations; ++i) {
         matrix_vector_multiply_csr(values, col_indices, row_start, p, Ap, n);
         double pAp = 0.0;
+        #pragma omp target teams distribute parallel for reduction(+:pAp)
         for (int j = 0; j < n; ++j) {
             pAp += p[j] * Ap[j];
         }
         double alpha = rsold / pAp;
 
+        #pragma omp target teams distribute parallel for
         for (int j = 0; j < n; ++j) {
             x[j] += alpha * p[j];
             r[j] -= alpha * Ap[j];
         }
 
         double rsnew = 0.0;
+        #pragma omp target teams distribute parallel for reduction(+:rsnew)
         for (int j = 0; j < n; ++j) {
             rsnew += r[j] * r[j];
         }
@@ -49,12 +58,14 @@ void conjugate_gradient_csr(const double* values, const int* col_indices, const 
 	    std::cout << i << " residual " << sqrt(rsnew) << std::endl;
 	}
 
+        #pragma omp target teams distribute parallel for
         for (int j = 0; j < n; ++j) {
             p[j] = r[j] + (rsnew / rsold) * p[j];
         }
 
         rsold = rsnew;
     }
+}
 
     delete[] r;
     delete[] p;
@@ -63,6 +74,8 @@ void conjugate_gradient_csr(const double* values, const int* col_indices, const 
 }
 
 void matrix_vector_multiply_csr(const double* values, const int* col_indices, const int* row_start, const double* x, double* result, int n) {
+    
+    #pragma omp target teams distribute parallel for
     for (int i = 0; i < n; ++i) {
         result[i] = 0.0;
         for (int j = row_start[i]; j < row_start[i + 1]; ++j) {
