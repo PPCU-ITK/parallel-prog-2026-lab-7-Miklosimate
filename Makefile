@@ -26,13 +26,23 @@
 
 CC       = nvc++
 CCFLAGS = -fast -mp
+GPUFLAGS = -mp=gpu -gpu=cc75 -Minfo=accel,mp
 
-BIN =  laplace2d
+#Accelerator Fatal Error: Failed to find device function 'nvkernel_main_F1L189_8'! File was compiled with: -gpu=cc80
+#Rebuild this file with -gpu=cc75 to use NVIDIA Tesla GPU 0
+
+BIN =  laplace2d cfd_cpu cfd_gpu
 
 all: $(BIN)
 
 laplace2d: laplace2d.cpp Makefile
 	$(CC) $(CCFLAGS) -o $@ laplace2d.cpp
+
+cfd_cpu: cfd_euler_lab3.cpp Makefile
+	$(CC) $(CCFLAGS) -o $@ cfd_euler_lab3.cpp
+
+cfd_gpu: cfd_euler.cpp Makefile
+	$(CC) $(CCFLAGS) $(GPUFLAGS) -o $@ cfd_euler.cpp
 
 clean:
 	$(RM) $(BIN)

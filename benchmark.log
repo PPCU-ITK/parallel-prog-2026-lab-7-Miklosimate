@@ -1,0 +1,72 @@
+Running scale 1x (Nx=200, Ny=100, nSteps=200)
+Step 0 completed, total kinetic energy: 9825.76
+Step 50 completed, total kinetic energy: 9595.83
+Step 100 completed, total kinetic energy: 9419.26
+Step 150 completed, total kinetic energy: 9254.27
+
+Name                          Count      Time       GB/s
+BC left (inflow)               Count=200      Time=1.609454     s GB/s=0.000     
+BC right (outflow)             Count=200      Time=1.432811     s GB/s=0.001     
+BC bottom (refl)               Count=200      Time=1.650678     s GB/s=0.002     
+BC top (refl)                  Count=200      Time=1.004526     s GB/s=0.003     
+Update interior                Count=200      Time=1.024933     s GB/s=0.624     
+Copyback                       Count=200      Time=1.107047     s GB/s=0.231     
+Total kinetic (red)            Count=200      Time=0.918446     s GB/s=0.105     
+CPU_RUNTIME_SECONDS,8.748431
+CPU_FINAL_KE,9099.233100
+GPU_RUNTIME_SECONDS,0.334742
+GPU_FINAL_KE,9099.23
+Running scale 4x (Nx=800, Ny=400, nSteps=200)
+Step 0 completed, total kinetic energy: 157424
+Step 50 completed, total kinetic energy: 156619
+Step 100 completed, total kinetic energy: 156039
+Step 150 completed, total kinetic energy: 155499
+
+Name                          Count      Time       GB/s
+BC left (inflow)               Count=200      Time=5.452158     s GB/s=0.000     
+BC right (outflow)             Count=200      Time=4.533547     s GB/s=0.001     
+BC bottom (refl)               Count=200      Time=4.390345     s GB/s=0.002     
+BC top (refl)                  Count=200      Time=3.218542     s GB/s=0.003     
+Update interior                Count=200      Time=6.687137     s GB/s=1.531     
+Copyback                       Count=200      Time=5.692366     s GB/s=0.720     
+Total kinetic (red)            Count=200      Time=5.482486     s GB/s=0.280     
+CPU_RUNTIME_SECONDS,35.457237
+CPU_FINAL_KE,154994.349378
+GPU_RUNTIME_SECONDS,0.432749
+GPU_FINAL_KE,154994
+Running scale 8x (Nx=1600, Ny=800, nSteps=200)
+Step 0 completed, total kinetic energy: 629818
+Step 50 completed, total kinetic energy: 628248
+Step 100 completed, total kinetic energy: 627141
+Step 150 completed, total kinetic energy: 626111
+
+Name                          Count      Time       GB/s
+BC left (inflow)               Count=200      Time=7.279409     s GB/s=0.001     
+BC right (outflow)             Count=200      Time=5.376037     s GB/s=0.002     
+BC bottom (refl)               Count=200      Time=5.142812     s GB/s=0.004     
+BC top (refl)                  Count=200      Time=4.036917     s GB/s=0.005     
+Update interior                Count=200      Time=12.674093    s GB/s=3.232     
+Copyback                       Count=200      Time=10.022748    s GB/s=1.635     
+Total kinetic (red)            Count=200      Time=8.076297     s GB/s=0.761     
+CPU_RUNTIME_SECONDS,52.609943
+CPU_FINAL_KE,625141.817636
+GPU_RUNTIME_SECONDS,0.687123
+GPU_FINAL_KE,625142
+Running scale 16x (Nx=3200, Ny=1600, nSteps=200)
+Step 0 completed, total kinetic energy: 2.51952e+06
+Step 50 completed, total kinetic energy: 2.51642e+06
+Step 100 completed, total kinetic energy: 2.51426e+06
+Step 150 completed, total kinetic energy: 2.51226e+06
+
+Name                          Count      Time       GB/s
+BC left (inflow)               Count=200      Time=13.226951    s GB/s=0.001     
+BC right (outflow)             Count=200      Time=13.438255    s GB/s=0.002     
+BC bottom (refl)               Count=200      Time=11.569816    s GB/s=0.004     
+BC top (refl)                  Count=200      Time=10.375882    s GB/s=0.004     
+Update interior                Count=200      Time=41.753410    s GB/s=3.924     
+Copyback                       Count=200      Time=25.183248    s GB/s=2.602     
+Total kinetic (red)            Count=200      Time=19.991208    s GB/s=1.229     
+CPU_RUNTIME_SECONDS,135.599139
+CPU_FINAL_KE,2510372.907872
+GPU_RUNTIME_SECONDS,1.52924
+GPU_FINAL_KE,2.51037e+06
